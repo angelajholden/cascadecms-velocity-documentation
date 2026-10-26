@@ -6,7 +6,7 @@ A development or staging site is ideal for testing changes before release. Howev
 
 **Key distinction:** A *hidden or unlinked page on a production website is still public if someone has its URL*. It is **not** a secure staging environment, and it is not isolated from shared CSS, JavaScript, templates, formats, blocks, or scheduled publishing.
 
-Do not assume a particular page-level switch prevents every type of publish. Confirm how the actual site's outputs, permissions, publishing schedules, relationships, publish sets, and destinations work.
+**Core safeguard:** Cascade CMS provides an asset-level **Include when publishing** checkbox. Turn this **off on a new development page** to keep that page out of publishing jobs, including a full-site publish. This is a useful, deliberate development practice—not a substitute for staging. Also inspect related files, parent folders, shared assets, and scheduled jobs so you understand the complete release path.
 
 ## 1. Inventory before editing
 
@@ -52,15 +52,28 @@ For Cascade-specific changes:
 - Use fictional or non-sensitive test content.
 - Avoid changing existing shared Templates, Blocks, Formats, CSS, or JavaScript until the impact is assessed.
 - Keep a change log listing each modified asset and its previous version.
+- Disable **Include when publishing** on each new work-in-progress page, and confirm it remains disabled until release.
 - Do not rely on an unlinked folder to protect confidential content.
 
-### Can publishing be disabled for a single page?
+### Prevent a work-in-progress page from publishing
 
-**Do not assume it can be done through a page-level checkbox.** Cascade supports publishable Outputs configured via Configurations and Content Types, destination selection, permissions, and publishing controls. Those controls may affect more than one page, and scheduled or bulk publishing may also matter.
+**Yes: page-level publishing can be disabled.** For a new page that isn't ready for release:
 
-Before changing any settings, inspect the specific Page, Content Type, Configuration/Outputs, and existing scheduled or bulk publishing jobs. Confirm with the Cascade administrator whether a safe per-asset workflow exists. Do not disable a shared Output simply to protect one draft page unless all affected pages and consequences are known.
+1. Edit the Page in Cascade CMS.
+2. Open its **Configure** tab.
+3. Uncheck **Include when publishing** and submit the change.
+4. Continue editing and previewing the page while keeping it excluded from publishing.
+5. Confirm the setting is still disabled before scheduled or full-site publishing occurs.
+6. After approval, enable **Include when publishing**, submit, and intentionally publish the approved page to the intended Destination/Output.
+7. Verify the live result.
 
-See the official [Publishing](https://www.hannonhill.com/cascadecms/latest/articles/content-authoring/publishing/index.html) and [Content Types](https://www.hannonhill.com/cascadecms/latest/design-in-cascade/content-types/index.html) references.
+**Why this matters:** Hannon Hill explicitly documents **Include when publishing** for an asset, including protecting a work-in-progress page from publishing jobs. This is a sensible default for draft pages in a site without staging.
+
+**Important nuance:** Disabling this setting does **not** remove previously published content from the web server. If the page was already public, evaluate whether to **Unpublish** it *before* disabling publishing. Disabling the setting can leave the existing public version in place. Likewise, the separate **Include when indexing** checkbox affects Cascade indexing, not publishing.
+
+This page-level safeguard does **not** isolate edits to shared Templates, Formats, Blocks, CSS, or JavaScript. Changes to those assets can affect published pages when relevant content or files are published. It also does not establish that the page is ready for release: approval, tests, publish scope, and rollback still matter.
+
+See [Hannon Hill — Unpublishing vs. Deleting Content](https://www.hannonhill.com/cascadecms/latest/articles/cascade-basics/unpublishing-vs-deleting.html).
 
 ## 5. Choose the testing approach
 
@@ -102,7 +115,7 @@ Send the client an approved preview/mockup or authorized test URL along with a s
 
 ## 7. Release safely
 
-1. Confirm the approved scope, affected assets, release window, and rollback owner.
+1. Confirm the approved scope, affected assets, release window, and rollback owner. For pages held out of publishing, re-enable **Include when publishing** only when approval has been recorded.
 2. Save or identify prior working versions of each changed asset.
 3. Check the active publishing Destination(s), Output(s), schedules, and publish scope.
 4. Publish the **smallest appropriate set of assets** in the agreed order. For shared formats or blocks, confirm which dependent pages need republishing.
@@ -138,6 +151,7 @@ Remove/unpublish temporary test pages and verify that no unneeded test assets re
 ## References
 
 - [Hannon Hill — Publishing](https://www.hannonhill.com/cascadecms/latest/articles/content-authoring/publishing/index.html)
+- [Hannon Hill — Unpublishing vs. Deleting Content](https://www.hannonhill.com/cascadecms/latest/articles/cascade-basics/unpublishing-vs-deleting.html)
 - [Hannon Hill — Creating Content and Preview Draft](https://www.hannonhill.com/cascadecms/latest/articles/cascade-basics/creating-content.html)
 - [Hannon Hill — Destinations](https://www.hannonhill.com/cascadecms/latest/content-authoring/publishing/destinations.html)
 - [Hannon Hill — Content Types and Publish Options](https://www.hannonhill.com/cascadecms/latest/design-in-cascade/content-types/index.html)
