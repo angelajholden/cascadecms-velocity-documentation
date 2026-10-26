@@ -125,6 +125,20 @@ Send the client an approved preview/mockup or authorized test URL along with a s
 
 **Avoid publishing the whole site as a default** for a small change.
 
+## Practices worth retaining from a mature development workflow
+
+Even when a client has no DEV instance, preserve the discipline used in a separate-environment release process:
+
+1. **Coordinate shared work:** Avoid simultaneous edits to the same shared Template or Format; assign an owner and a review window.
+2. **Keep a version-controlled source of truth where feasible:** Begin from the latest approved code, work on a feature branch, and review differences before deployment.
+3. **Build representative test content:** Create a sample page with realistic text, images, links, and edge cases—not merely an empty module.
+4. **Review before release:** Provide the reviewer with a preview or safe test artifact plus a summary of the changed assets and expected behavior.
+5. **Control the publication boundary:** In environments with separate destinations, temporarily disabling an affected Destination may be part of an administrator-approved release plan. **In single-production-destination environments, do not disable a shared production Destination casually**—use asset-level publish exclusion for unfinished pages and a coordinated release window for shared changes.
+6. **Verify in the actual production context:** Even if the component passed a separate test, check the final version on representative live pages.
+7. **Communicate the release:** Share the affected pages, a concise description, test results, and any known follow-up.
+
+These are transferable **process principles**. The exact repository branches, review tools, site names, approval channels, and CMS paths must be designed independently for each client. They should not be copied from another organization's internal runbook.
+
 ## 8. Rollback and cleanup
 
 If a release fails:
